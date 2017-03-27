@@ -1,7 +1,7 @@
 1. in server/app./js
 	create id, queue and games.
 	emit gameStarted
-2. in frontend/index.js
+2. add status in index.html
+3. in frontend/index.js
 	on('game_started')
 	color
-3. in index.html
