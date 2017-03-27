@@ -1,3 +1,13 @@
-1. npm i --save express
-2. mkdir server
-3. server/app.js boilerplate
+1.Explain	
+	Most of internet runs on tcp
+		Opens and closes connection each time, slow
+		Has benefits
+			stabilitiy, reliability, network and battery usage
+		but slow
+	WebSockets-  open one connection and keep using. close at end
+
+2. npm i --save socket.io
+3. in fronend/index.js
+	a. move code into initGame() for reuse
+	b. add socket.io and change handlemove code
+4. add socket logic to app.js
