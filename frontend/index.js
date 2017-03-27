@@ -2,7 +2,7 @@ var ChessBoard = require("chessboardjs")
 var Chess  = require('chess.js').Chess
 var socket = require('socket.io-client')()
 
-var board, game;
+var board, game, color;
 
 var initGame = function (){
 	var config = {
@@ -15,8 +15,6 @@ var initGame = function (){
 
 	game = new Chess()
 
-	console.log('test')
-	
 	socket.on('move', function(msg){
 		console.log('recieved move')
 		game.move(msg)
@@ -25,8 +23,13 @@ var initGame = function (){
 	})
 }
 
-var handleMove = function(source, target) {
+var handleMove = function(source, target, piece) {
+	if(piece[0] != color){
+		return 'snapback'
+	}
+
 	var move = game.move({from:source, to:target})
+	
 	if(move){
 		socket.emit('move', move)
 	} else {
@@ -36,5 +39,8 @@ var handleMove = function(source, target) {
 	}
 }
 
-
-initGame()
+socket.on('gameStarted',function(msg){
+	color = msg
+	initGame()
+	document.getElementById('status').innerHTML = 'Color: ' + color
+})

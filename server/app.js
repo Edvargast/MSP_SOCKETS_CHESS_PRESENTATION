@@ -10,14 +10,43 @@ http.listen(port, function() {
 // setup my socket server
 var io = require('socket.io')(http);
 
-waiting = []
+games = {}
+queue = []
 id = 0
-
+gameId = 0
 io.on('connection', function(socket) {
     console.log('New connection');
+    
+    assignId(socket)
+    if (queue.length > 0){
+    	startGame(socket, queue.pop())
+    	socket.emit('gameStarted','w')
+    	games[socket.gid].black.emit('gameStarted','b')
+    } else {
+    	queue.push(socket)
+    }
 
     socket.on('move', function(msg) {
-    	console.log("MOVE")
-       	socket.broadcast.emit('move', msg);
+    	if (socket.userId === games[socket.gid].white.userId){
+       		games[socket.gid].black.emit('move', msg)
+    	} else {
+       		games[socket.gid].white.emit('move', msg)
+    	}
     })
 })
+
+
+
+function assignId(socket){
+	socket.userId = id
+	id++
+}
+function startGame(s1,s2){
+	s1.gid = gameId
+	s2.gid = gameId
+	games[gameId] = {
+		white:s1,
+		black:s2
+	}
+	gameId++
+}

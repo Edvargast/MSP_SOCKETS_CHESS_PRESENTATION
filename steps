@@ -1,8 +1,7 @@
-1. frontend/index.js
-	socket.emit line in handler
-2. server/app.hs 
-	socket.on('move')
-3. frontend/index.js
-	socket.on('move')
-4. frontend/index.js
-	make sure not to send illegal moves. (will have to declare game and baord globally)
+1. in server/app./js
+	create id, queue and games.
+	emit gameStarted
+2. in frontend/index.js
+	on('game_started')
+	color
+3. in index.html
