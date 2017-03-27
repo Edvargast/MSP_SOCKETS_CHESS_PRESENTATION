@@ -1,4 +1,4 @@
-1. npm i
+1. npm init
 2. npm i --save chessboardjs
 	ui
 3. npm i --save chess.js
