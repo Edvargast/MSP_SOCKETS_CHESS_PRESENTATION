@@ -10,10 +10,14 @@ http.listen(port, function() {
 // setup my socket server
 var io = require('socket.io')(http);
 
+waiting = []
+id = 0
+
 io.on('connection', function(socket) {
     console.log('New connection');
 
-    socket.on('message', function(msg) {
-        console.log('Got message from client: ' + msg);
+    socket.on('move', function(msg) {
+    	console.log("MOVE")
+       	socket.broadcast.emit('move', msg);
     })
 })

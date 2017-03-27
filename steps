@@ -1,13 +1,8 @@
-1.Explain	
-	Most of internet runs on tcp
-		Opens and closes connection each time, slow
-		Has benefits
-			stabilitiy, reliability, network and battery usage
-		but slow
-	WebSockets-  open one connection and keep using. close at end
-
-2. npm i --save socket.io
-3. in fronend/index.js
-	a. move code into initGame() for reuse
-	b. add socket.io and change handlemove code
-4. add socket logic to app.js
+1. frontend/index.js
+	socket.emit line in handler
+2. server/app.hs 
+	socket.on('move')
+3. frontend/index.js
+	socket.on('move')
+4. frontend/index.js
+	make sure not to send illegal moves. (will have to declare game and baord globally)
