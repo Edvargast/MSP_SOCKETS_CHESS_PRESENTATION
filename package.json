@@ -1,0 +1,18 @@
+{
+  "name": "rc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chess.js": "^0.10.2",
+    "chessboardjs": "^0.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "browserify": "browserify ./frontend/index.js -o ./public/index.js",
+    "watch": "watchify ./frontend/index.js -o public/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
