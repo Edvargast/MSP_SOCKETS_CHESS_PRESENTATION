@@ -8,4 +8,5 @@
 6. copy img/ and css/ from node_modules/chessboardjs/www into public
 7. mkdir frontend
 8. frotnend/index.js
-9. browserify frontend/index.js -o public/index.js
+9. Install browserify/watchify. Explain and add scripts to package.json
+10. browserify frontend/index.js -o public/index.js
