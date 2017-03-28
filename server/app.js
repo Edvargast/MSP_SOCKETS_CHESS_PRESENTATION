@@ -30,6 +30,14 @@ io.on('connection', function(socket) {
         getOpponent(socket).emit('move', msg)
     })
 
+    socket.on('disconnect',function(){
+        console.log('dc')
+        opp = getOpponent(socket)
+        // opp.emit('dc')
+        opp.disconnect()
+        games[socket.gid] = undefined
+    })
+
 })
 
 

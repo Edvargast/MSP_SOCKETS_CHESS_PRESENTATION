@@ -187,7 +187,7 @@ var ChessBoard = require("chessboardjs")
 var Chess  = require('chess.js').Chess
 var socket = require('socket.io-client')()
 
-var board, game, color;
+var status, board, game, color;
 
 var initGame = function (){
 	var config = {
@@ -205,6 +205,11 @@ var initGame = function (){
 		game.move(msg)
 		// fen is stringified version of game
 		board.position(game.fen(), false)
+	})
+
+	socket.on('disconnect',function(){
+		board = ChessBoard('board','start')
+		status.innerHTML = 'Player disconnected, please refresh page to start a new game.'
 	})
 }
 
@@ -227,7 +232,8 @@ var handleMove = function(source, target, piece) {
 socket.on('gameStarted',function(msg){
 	color = msg
 	initGame()
-	document.getElementById('status').innerHTML = 'Color: ' + color
+	status = document.getElementById('status')
+	status.innerHTML = 'Color: ' + color
 })
 },{"chess.js":9,"chessboardjs":10,"socket.io-client":38}],4:[function(require,module,exports){
 module.exports = after
