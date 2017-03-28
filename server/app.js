@@ -27,12 +27,9 @@ io.on('connection', function(socket) {
     }
 
     socket.on('move', function(msg) {
-    	if (socket.userId === games[socket.gid].white.userId){
-       		games[socket.gid].black.emit('move', msg)
-    	} else {
-       		games[socket.gid].white.emit('move', msg)
-    	}
+        getOpponent(socket).emit('move', msg)
     })
+
 })
 
 
@@ -41,6 +38,10 @@ function assignId(socket){
 	socket.userId = id
 	id++
 }
+function getOpponent(socket){
+    return socket.userId === games[socket.gid].white.userId ? games[socket.gid].black : games[socket.gid].white
+}
+
 function startGame(s1,s2){
 	s1.gid = gameId
 	s2.gid = gameId
